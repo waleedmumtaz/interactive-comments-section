@@ -2,7 +2,7 @@
 
 ## Built with SvelteKit and Tailwind CSS
 
-### Preview: [Interactive Comments Section]()
+### Preview: [Interactive Comments Section](https://interactive-comments-section-kohl.vercel.app/)
 
 #### A challenge from [Frontend Mentor](https://www.frontendmentor.io)
 
