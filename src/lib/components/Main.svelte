@@ -1,7 +1,7 @@
 <script>
-  import SingleComment from '$lib/components/SingleComment.svelte';
+	import SingleComment from '$lib/components/SingleComment.svelte';
 </script>
 
 <main>
-  <SingleComment />
+	<SingleComment />
 </main>
