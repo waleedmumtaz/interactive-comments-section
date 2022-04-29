@@ -1,14 +1,24 @@
-<div class="p-4 md:mx-auto md:max-w-3xl md:p-6">
+<script>
+	export let avatar, userName, createdAt, content, score;
+</script>
+
+<div class="pb-4 last:pb-0 md:pb-6">
 	<div
 		class="rounded-md bg-white p-4 md:grid md:grid-cols-12 md:items-start md:justify-start md:gap-6 md:p-6"
 	>
+		<!-- scores (desktop) -->
 		<div
 			class="hidden md:flex md:h-fit md:flex-col md:items-center md:justify-start md:rounded-md md:bg-clr-light-gray"
 		>
+			<!-- plus button -->
 			<button class="px-2 py-4">
 				<img src="/icon-plus.svg" alt="plus" />
 			</button>
-			<p class="font-fw-medium text-clr-moderate-blue">12</p>
+
+			<!-- score -->
+			<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
+
+			<!-- minus button -->
 			<button class="px-2 py-4">
 				<img src="/icon-minus.svg" alt="minus" />
 			</button>
@@ -16,10 +26,17 @@
 		<div class="md:col-span-11">
 			<div class="flex items-center gap-5 md:justify-between">
 				<div class="flex items-center gap-5">
-					<img class="max-w-[2rem]" src="/avatars/image-amyrobson.png" alt="Avatar of Amy Robson" />
-					<p class="font-fw-medium text-clr-dark-blue">amyrobson</p>
-					<p class="text-clr-grayish-blue">1 month ago</p>
+					<!-- avatar -->
+					<img class="max-w-[2rem]" src={avatar} alt="Avatar of Amy Robson" />
+
+					<!-- username -->
+					<p class="font-fw-medium text-clr-dark-blue">{userName}</p>
+
+					<!-- content created at -->
+					<p class="text-clr-grayish-blue">{createdAt}</p>
 				</div>
+
+				<!-- reply button (desktop) -->
 				<button
 					class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
 					><span>
@@ -27,21 +44,27 @@
 					</span>Reply
 				</button>
 			</div>
-			<p class="py-4 text-clr-grayish-blue md:pb-0">
-				Impressive! Though it seems the drag feature could be improved. But overall it looks
-				incredible. You've nailed the design and the responsiveness at various breakpoints works
-				really well.
-			</p>
+
+			<!-- content -->
+			<p class="py-4 text-clr-grayish-blue md:pb-0">{content}</p>
 			<div class="flex items-center justify-between">
+				<!-- scores (mobile) -->
 				<div class="flex items-center gap-3 rounded-md bg-clr-light-gray md:hidden">
+					<!-- minus button -->
 					<button class="px-2 py-3">
 						<img src="/icon-minus.svg" alt="minus" />
 					</button>
-					<p class="font-fw-medium text-clr-moderate-blue">12</p>
+
+					<!-- score -->
+					<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
+
+					<!-- plus button -->
 					<button class="px-2 py-3">
 						<img src="/icon-plus.svg" alt="plus" />
 					</button>
 				</div>
+
+				<!-- reply button (mobile) -->
 				<button
 					class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
 					><span>
