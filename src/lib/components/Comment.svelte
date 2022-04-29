@@ -1,5 +1,7 @@
 <script>
 	export let avatar, userName, createdAt, content, score;
+
+	let currentUser = 'juliusomo';
 </script>
 
 <div class="pb-4 last:pb-0 md:pb-6">
@@ -32,17 +34,41 @@
 					<!-- username -->
 					<p class="font-fw-medium text-clr-dark-blue">{userName}</p>
 
+					{#if userName === currentUser}
+						<p class="bg-clr-moderate-blue px-2 font-fw-medium text-clr-white">you</p>
+					{/if}
+
 					<!-- content created at -->
 					<p class="text-clr-grayish-blue">{createdAt}</p>
 				</div>
 
 				<!-- reply button (desktop) -->
-				<button
-					class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
-					><span>
-						<img src="/icon-reply.svg" alt="reply" />
-					</span>Reply
-				</button>
+				<div class="flex items-center gap-6">
+					{#if userName === currentUser}
+						<button
+							class="hidden font-fw-medium text-clr-soft-red outline-offset-8 md:flex md:items-center md:gap-2"
+						>
+							<span>
+								<img src="/icon-delete.svg" alt="delete" />
+							</span>Delete
+						</button>
+					{/if}
+					{#if userName === currentUser}
+						<button
+							class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
+							><span>
+								<img src="/icon-edit.svg" alt="reply" />
+							</span>Edit
+						</button>
+					{:else}
+						<button
+							class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
+							><span>
+								<img src="/icon-reply.svg" alt="reply" />
+							</span>Reply
+						</button>
+					{/if}
+				</div>
 			</div>
 
 			<!-- content -->
@@ -65,12 +91,32 @@
 				</div>
 
 				<!-- reply button (mobile) -->
-				<button
-					class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
-					><span>
-						<img src="/icon-reply.svg" alt="reply" />
-					</span>Reply
-				</button>
+				<div class="flex items-center gap-6">
+					{#if userName === currentUser}
+						<button
+							class="flex items-center gap-2 font-fw-medium text-clr-soft-red outline-offset-8 md:hidden"
+						>
+							<span>
+								<img src="/icon-delete.svg" alt="delete" />
+							</span>Delete
+						</button>
+					{/if}
+					{#if userName === currentUser}
+						<button
+							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
+							><span>
+								<img src="/icon-edit.svg" alt="reply" />
+							</span>Edit
+						</button>
+					{:else}
+						<button
+							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
+							><span>
+								<img src="/icon-reply.svg" alt="reply" />
+							</span>Reply
+						</button>
+					{/if}
+				</div>
 			</div>
 		</div>
 	</div>
