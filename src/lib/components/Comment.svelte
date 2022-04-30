@@ -1,7 +1,6 @@
 <script>
-	export let avatar, userName, createdAt, content, score;
-
-	let currentUser = 'juliusomo';
+	import { currentUser } from '$lib/stores/comments.js';
+	export let id, avatar, userName, createdAt, content, score;
 </script>
 
 <div class="pb-4 last:pb-0 md:pb-6">
@@ -13,7 +12,7 @@
 			class="hidden md:flex md:h-fit md:flex-col md:items-center md:justify-start md:rounded-md md:bg-clr-light-gray"
 		>
 			<!-- plus button -->
-			<button class="px-2 py-4">
+			<button class="px-2 py-4 active:contrast-0">
 				<img src="/icon-plus.svg" alt="plus" />
 			</button>
 
@@ -21,7 +20,7 @@
 			<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
 
 			<!-- minus button -->
-			<button class="px-2 py-4">
+			<button class="px-2 py-4 active:contrast-0">
 				<img src="/icon-minus.svg" alt="minus" />
 			</button>
 		</div>
@@ -34,7 +33,7 @@
 					<!-- username -->
 					<p class="font-fw-medium text-clr-dark-blue">{userName}</p>
 
-					{#if userName === currentUser}
+					{#if userName === $currentUser.username}
 						<p class="bg-clr-moderate-blue px-2 font-fw-medium text-clr-white">you</p>
 					{/if}
 
@@ -44,25 +43,25 @@
 
 				<!-- reply button (desktop) -->
 				<div class="flex items-center gap-6">
-					{#if userName === currentUser}
+					{#if userName === $currentUser.username}
 						<button
-							class="hidden font-fw-medium text-clr-soft-red outline-offset-8 md:flex md:items-center md:gap-2"
+							class="hidden font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:flex md:items-center md:gap-2"
 						>
 							<span>
 								<img src="/icon-delete.svg" alt="delete" />
 							</span>Delete
 						</button>
 					{/if}
-					{#if userName === currentUser}
+					{#if userName === $currentUser.username}
 						<button
-							class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
+							class="hidden active:brightness-200 md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
 							><span>
 								<img src="/icon-edit.svg" alt="reply" />
 							</span>Edit
 						</button>
 					{:else}
 						<button
-							class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
+							class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8 active:brightness-200"
 							><span>
 								<img src="/icon-reply.svg" alt="reply" />
 							</span>Reply
@@ -77,7 +76,7 @@
 				<!-- scores (mobile) -->
 				<div class="flex items-center gap-3 rounded-md bg-clr-light-gray md:hidden">
 					<!-- minus button -->
-					<button class="px-2 py-3">
+					<button class="px-2 py-3 active:contrast-0">
 						<img src="/icon-minus.svg" alt="minus" />
 					</button>
 
@@ -85,32 +84,32 @@
 					<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
 
 					<!-- plus button -->
-					<button class="px-2 py-3">
+					<button class="px-2 py-3 active:contrast-0">
 						<img src="/icon-plus.svg" alt="plus" />
 					</button>
 				</div>
 
 				<!-- reply button (mobile) -->
 				<div class="flex items-center gap-6">
-					{#if userName === currentUser}
+					{#if userName === $currentUser.username}
 						<button
-							class="flex items-center gap-2 font-fw-medium text-clr-soft-red outline-offset-8 md:hidden"
+							class="flex items-center gap-2 font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:hidden"
 						>
 							<span>
 								<img src="/icon-delete.svg" alt="delete" />
 							</span>Delete
 						</button>
 					{/if}
-					{#if userName === currentUser}
+					{#if userName === $currentUser.username}
 						<button
-							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
+							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 active:brightness-200 md:hidden"
 							><span>
 								<img src="/icon-edit.svg" alt="reply" />
 							</span>Edit
 						</button>
 					{:else}
 						<button
-							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden"
+							class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden active:brightness-200"
 							><span>
 								<img src="/icon-reply.svg" alt="reply" />
 							</span>Reply
