@@ -5,7 +5,7 @@
 </script>
 
 <main>
-	<div class="p-4 md:mx-auto md:max-w-3xl md:p-6">
+	<div class="px-4 pt-4 md:mx-auto md:max-w-3xl md:px-6 md:pt-6">
 		<!-- comments -->
 		{#each $comments as comment}
 			<Comment
@@ -19,9 +19,9 @@
 
 			<!-- replies to comment -->
 			{#if comment.replies.length > 0}
-				<div class="grid grid-cols-12 md:place-items-center">
-					<div class="h-full w-1 bg-clr-light-gray" />
-					<div class="col-span-11">
+				<div class="flex gap-4">
+					<div class="mb-4 h-auto w-2 rounded-full bg-clr-light-gray md:ml-4 md:mb-6" />
+					<div class="">
 						{#each comment.replies as reply}
 							<Comment
 								id={reply.id}
