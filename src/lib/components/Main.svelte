@@ -20,8 +20,8 @@
 			<!-- replies to comment -->
 			{#if comment.replies.length > 0}
 				<div class="flex gap-4">
-					<div class="mb-4 h-auto w-2 rounded-full bg-clr-light-gray md:ml-4 md:mb-6" />
-					<div class="">
+					<div class="mb-4 h-auto w-1 rounded-full bg-clr-light-gray md:ml-4 md:mb-6" />
+					<div class="w-full">
 						{#each comment.replies as reply}
 							<Comment
 								id={reply.id}

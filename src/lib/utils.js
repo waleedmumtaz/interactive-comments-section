@@ -29,12 +29,12 @@ export const addComment = (inputComment) => {
 export const deleteComment = (commentId) => {
 	comments.update((comments) => {
 		return comments.filter((comment) => {
-			const replies = comment.replies;
+			// let replies = comment.replies;
 
-			if (replies.length > 0) {
-				replies.forEach((reply) => {
+			if (comment.replies.length > 0) {
+				comment.replies.forEach((reply) => {
 					if (reply.id === commentId) {
-						comment.replies = replies.filter((reply) => reply.id !== commentId);
+						comment.replies = comment.replies.filter((reply) => reply.id !== commentId);
 					}
 				});
 			}
