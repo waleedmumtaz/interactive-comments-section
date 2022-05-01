@@ -92,7 +92,7 @@
 						class={`${
 							replyingTo === undefined ? 'hidden' : 'font-fw-medium text-clr-moderate-blue'
 						}`}>@{replyingTo}</span
-					>{' '}{content}
+					>{content}
 				</p>
 				<div class="flex items-center justify-between">
 					<!-- scores (mobile) -->

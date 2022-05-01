@@ -1,10 +1,16 @@
 <script>
 	import { currentUser } from '$lib/stores/comments.js';
 	import { replyComment } from '$lib/utils.js';
+	import { onMount } from 'svelte';
 
 	export let replyId, replyingTo, isReplying;
 
-	let inputReply = `@${replyingTo}`;
+	let inputReply = `@${replyingTo} `;
+	let inputRef;
+
+	onMount(() => {
+		inputRef.focus();
+	});
 </script>
 
 <div>
@@ -22,6 +28,7 @@
 				rows="5"
 				name="input-comment"
 				bind:value={inputReply}
+				bind:this={inputRef}
 				placeholder="Add a comment..."
 				aria-label="Add a comment..."
 			/>
