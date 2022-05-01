@@ -29,8 +29,6 @@ export const addComment = (inputComment) => {
 export const deleteComment = (commentId) => {
 	comments.update((comments) => {
 		return comments.filter((comment) => {
-			// let replies = comment.replies;
-
 			if (comment.replies.length > 0) {
 				comment.replies.forEach((reply) => {
 					if (reply.id === commentId) {
@@ -66,6 +64,14 @@ export const replyComment = (replyId, replyingTo, replyComment) => {
 		return comments.map((comment) => {
 			if (comment.id === replyId) {
 				comment.replies = [...comment.replies, newReply];
+			}
+
+			if (comment.replies.length > 0) {
+				comment.replies.forEach((reply) => {
+					if (reply.id === replyId) {
+						comment.replies = [...comment.replies, newReply];
+					}
+				});
 			}
 
 			return comment;
