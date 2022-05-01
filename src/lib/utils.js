@@ -28,7 +28,48 @@ export const addComment = (inputComment) => {
 // delete comment
 export const deleteComment = (commentId) => {
 	comments.update((comments) => {
-		return comments.filter((comment) => comment.id !== commentId);
+		return comments.filter((comment) => {
+			const replies = comment.replies;
+
+			if (replies.length > 0) {
+				replies.forEach((reply) => {
+					if (reply.id === commentId) {
+						comment.replies = replies.filter((reply) => reply.id !== commentId);
+					}
+				});
+			}
+			return comment.id !== commentId;
+		});
+	});
+};
+
+// reply to a comment
+export const replyComment = (replyId, replyingTo, replyComment) => {
+	const replyContent = replyComment.replace(`@${replyingTo}`, '');
+
+	const newReply = {
+		id: Date.now(),
+		content: replyContent,
+		createdAt: timeSince(Date.now()),
+		score: 0,
+		replyingTo: replyingTo,
+		user: {
+			image: {
+				png: currentUserAvatar
+			},
+			username: currentUserName
+		},
+		replies: []
+	};
+
+	comments.update((comments) => {
+		return comments.map((comment) => {
+			if (comment.id === replyId) {
+				comment.replies = [...comment.replies, newReply];
+			}
+
+			return comment;
+		});
 	});
 };
 

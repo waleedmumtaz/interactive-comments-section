@@ -30,6 +30,7 @@
 								createdAt={reply.createdAt}
 								content={reply.content}
 								score={reply.score}
+								replyingTo={reply.replyingTo}
 							/>
 						{/each}
 					</div>
