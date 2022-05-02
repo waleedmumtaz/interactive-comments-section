@@ -79,6 +79,28 @@ export const replyComment = (replyId, replyingTo, replyComment) => {
 	});
 };
 
+// edit a comment
+export const editComment = (commentId, editedComment, replyingTo) => {
+	const editedCommentContent = editedComment.replace(`@${replyingTo}`, '');
+
+	comments.update((comments) => {
+		return comments.map((comment) => {
+			if (comment.id === commentId) {
+				comment.content = editedCommentContent;
+			}
+
+			if (comment.replies.length > 0) {
+				comment.replies.forEach((reply) => {
+					if (reply.id === commentId) {
+						reply.content = editedCommentContent;
+					}
+				});
+			}
+			return comment;
+		});
+	});
+};
+
 export const timeSince = (date) => {
 	let seconds = Math.floor((new Date() - date) / 1000);
 

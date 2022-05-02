@@ -2,9 +2,14 @@
 	import ReplyComment from '$lib/components/ReplyComment.svelte';
 	import { currentUser } from '$lib/stores/comments.js';
 	import { deleteComment } from '$lib/utils.js';
+	import EditComment from './EditComment.svelte';
+
+	// const currentUserImage = $currentUser.image.png.replace('./images', '');
+	// const currentUserName = $currentUser.username;
 
 	export let id, avatar, userName, createdAt, content, score, replyingTo;
-	let isReplying = false;
+	let isReplying,
+		isEditing = false;
 </script>
 
 <div>
@@ -65,6 +70,7 @@
 						{#if userName === $currentUser.username}
 							<!-- edit button (desktop) -->
 							<button
+								on:click|preventDefault={() => (isEditing = true)}
 								class="hidden active:brightness-200 md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
 								><span>
 									<img src="/icon-edit.svg" alt="edit" />
@@ -92,7 +98,7 @@
 						class={`${
 							replyingTo === undefined ? 'hidden' : 'font-fw-medium text-clr-moderate-blue'
 						}`}>@{replyingTo}</span
-					>{content}
+					>{' '}{content}
 				</p>
 				<div class="flex items-center justify-between">
 					<!-- scores (mobile) -->
@@ -127,6 +133,7 @@
 						{#if userName === $currentUser.username}
 							<!-- edit button (mobile) -->
 							<button
+								on:click|preventDefault={() => (isEditing = true)}
 								class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 active:brightness-200 md:hidden"
 								><span>
 									<img src="/icon-edit.svg" alt="edit" />
@@ -149,5 +156,8 @@
 	</div>
 	{#if isReplying}
 		<ReplyComment replyId={id} replyingTo={userName} bind:isReplying />
+	{/if}
+	{#if isEditing}
+		<EditComment {id} {avatar} {userName} {createdAt} {content} {score} {replyingTo} />
 	{/if}
 </div>

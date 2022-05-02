@@ -59,6 +59,7 @@
 					rows="3"
 					name="input-comment"
 					bind:value={inputReply}
+					bind:this={inputRef}
 					placeholder="Add a comment..."
 					aria-label="Add a comment..."
 				/>
