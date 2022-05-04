@@ -117,7 +117,11 @@
 					<div class="flex items-center gap-3 rounded-md bg-clr-light-gray md:hidden">
 						<!-- minus button -->
 						<button
-							on:click|preventDefault={() => downvoteComment(id)}
+							on:click|preventDefault={() => {
+								downvoteComment(id, downvotedOnce);
+								downvotedOnce = true;
+								upvotedOnce = false;
+							}}
 							class="px-2 py-3 active:contrast-0"
 						>
 							<img src="/icon-minus.svg" alt="minus" />
@@ -128,7 +132,11 @@
 
 						<!-- plus button -->
 						<button
-							on:click|preventDefault={() => upvoteComment(id)}
+							on:click|preventDefault={() => {
+								upvoteComment(id, upvotedOnce);
+								upvotedOnce = true;
+								downvotedOnce = false;
+							}}
 							class="px-2 py-3 active:contrast-0"
 						>
 							<img src="/icon-plus.svg" alt="plus" />
