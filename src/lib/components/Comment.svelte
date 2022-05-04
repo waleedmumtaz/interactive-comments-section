@@ -1,19 +1,20 @@
 <script>
 	import ReplyComment from '$lib/components/ReplyComment.svelte';
 	import { currentUser } from '$lib/stores/comments.js';
-	import { deleteComment } from '$lib/utils.js';
+	import { deleteComment, downvoteComment, upvoteComment } from '$lib/utils.js';
 	import EditComment from './EditComment.svelte';
 
-	// const currentUserImage = $currentUser.image.png.replace('./images', '');
-	// const currentUserName = $currentUser.username;
-
 	export let id, avatar, userName, createdAt, content, score, replyingTo;
+
 	let isReplying,
 		isEditing = false;
+
+	let upvotedOnce,
+		downvotedOnce = false;
 </script>
 
 <div>
-	<div class="pb-4 md:pb-6">
+	<div class={`${isEditing ? 'hidden' : 'block'} pb-4 md:pb-6`}>
 		<div
 			class="rounded-md bg-white p-4 md:grid md:grid-cols-12 md:items-start md:justify-start md:gap-6 md:p-6"
 		>
@@ -22,7 +23,14 @@
 				class="hidden md:flex md:h-fit md:flex-col md:items-center md:justify-start md:rounded-md md:bg-clr-light-gray"
 			>
 				<!-- plus button -->
-				<button class="px-2 py-4 active:contrast-0">
+				<button
+					on:click|preventDefault={() => {
+						upvoteComment(id, upvotedOnce);
+						upvotedOnce = true;
+						downvotedOnce = false;
+					}}
+					class="px-2 py-4 active:contrast-0"
+				>
 					<img src="/icon-plus.svg" alt="plus" />
 				</button>
 
@@ -30,7 +38,14 @@
 				<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
 
 				<!-- minus button -->
-				<button class="px-2 py-4 active:contrast-0">
+				<button
+					on:click|preventDefault={() => {
+						downvoteComment(id, downvotedOnce);
+						downvotedOnce = true;
+						upvotedOnce = false;
+					}}
+					class="px-2 py-4 active:contrast-0"
+				>
 					<img src="/icon-minus.svg" alt="minus" />
 				</button>
 			</div>
@@ -91,9 +106,6 @@
 
 				<!-- content -->
 				<p class="py-4 text-clr-grayish-blue md:pb-0">
-					<!-- {#if replyingTo !== undefined}
-						<span class="font-fw-medium text-clr-moderate-blue">@{replyingTo}</span>
-					{/if}{content} -->
 					<span
 						class={`${
 							replyingTo === undefined ? 'hidden' : 'font-fw-medium text-clr-moderate-blue'
@@ -104,7 +116,10 @@
 					<!-- scores (mobile) -->
 					<div class="flex items-center gap-3 rounded-md bg-clr-light-gray md:hidden">
 						<!-- minus button -->
-						<button class="px-2 py-3 active:contrast-0">
+						<button
+							on:click|preventDefault={() => downvoteComment(id)}
+							class="px-2 py-3 active:contrast-0"
+						>
 							<img src="/icon-minus.svg" alt="minus" />
 						</button>
 
@@ -112,7 +127,10 @@
 						<p class="font-fw-medium text-clr-moderate-blue">{score}</p>
 
 						<!-- plus button -->
-						<button class="px-2 py-3 active:contrast-0">
+						<button
+							on:click|preventDefault={() => upvoteComment(id)}
+							class="px-2 py-3 active:contrast-0"
+						>
 							<img src="/icon-plus.svg" alt="plus" />
 						</button>
 					</div>
@@ -158,6 +176,15 @@
 		<ReplyComment replyId={id} replyingTo={userName} bind:isReplying />
 	{/if}
 	{#if isEditing}
-		<EditComment {id} {avatar} {userName} {createdAt} {content} {score} {replyingTo} />
+		<EditComment
+			{id}
+			{avatar}
+			{userName}
+			{createdAt}
+			{content}
+			{score}
+			{replyingTo}
+			bind:isEditing
+		/>
 	{/if}
 </div>

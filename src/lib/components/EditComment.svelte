@@ -3,11 +3,9 @@
 	import { deleteComment, editComment } from '$lib/utils.js';
 	import { onMount } from 'svelte';
 
-	export let id, avatar, userName, createdAt, content, score, replyingTo;
-	let isReplying,
-		isEditing = false;
+	export let id, avatar, userName, createdAt, content, score, replyingTo, isEditing;
 
-	let inputEditedComment = `@${replyingTo} ${content}`;
+	let inputEditedComment = `@${replyingTo}${content}`;
 	let inputRef;
 
 	onMount(() => {
@@ -92,7 +90,12 @@
 			</div>
 
 			<!-- content -->
-			<form on:submit|preventDefault={() => editComment(id, inputEditedComment, replyingTo)}>
+			<form
+				on:submit|preventDefault={() => {
+					editComment(id, inputEditedComment, replyingTo);
+					isEditing = false;
+				}}
+			>
 				<div class="py-4">
 					<textarea
 						class="w-full resize-none rounded-md px-4 py-2 outline outline-1 outline-clr-light-gray focus:outline-clr-dark-blue"

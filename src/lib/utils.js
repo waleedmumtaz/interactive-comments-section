@@ -101,6 +101,50 @@ export const editComment = (commentId, editedComment, replyingTo) => {
 	});
 };
 
+// upvote a comment
+export const upvoteComment = (commentId, upvotedOnce) => {
+	if (!upvotedOnce) {
+		comments.update((comments) => {
+			return comments.map((comment) => {
+				if (comment.id === commentId) {
+					comment.score++;
+				}
+
+				if (comment.replies.length > 0) {
+					comment.replies.forEach((reply) => {
+						if (reply.id === commentId) {
+							reply.score++;
+						}
+					});
+				}
+				return comment;
+			});
+		});
+	}
+};
+
+// downvote a comment
+export const downvoteComment = (commentId, downvotedOnce) => {
+	if (!downvotedOnce) {
+		comments.update((comments) => {
+			return comments.map((comment) => {
+				if (comment.id === commentId) {
+					comment.score--;
+				}
+
+				if (comment.replies.length > 0) {
+					comment.replies.forEach((reply) => {
+						if (reply.id === commentId) {
+							reply.score--;
+						}
+					});
+				}
+				return comment;
+			});
+		});
+	}
+};
+
 export const timeSince = (date) => {
 	let seconds = Math.floor((new Date() - date) / 1000);
 
