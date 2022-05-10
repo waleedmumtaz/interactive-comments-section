@@ -3,10 +3,33 @@
 	import Comment from '$lib/components/Comment.svelte';
 	import { comments } from '$lib/stores/comments.js';
 	import { flip } from 'svelte/animate';
-	import { scale,slide } from 'svelte/transition';
+	import { scale, slide } from 'svelte/transition';
+
+	let confirmDeleteComment = false;
 </script>
 
 <main>
+	<!-- Overlay for delete confirmation -->
+	{#if confirmDeleteComment}
+		<div class="absolute inset-0 grid place-items-center bg-black bg-opacity-50">
+			<div class="m-4 max-w-sm rounded-md bg-clr-light-gray p-6">
+				<p class="text-2xl font-fw-medium text-clr-dark-blue">Delete comment</p>
+				<p class="my-3">
+					Are you sure you want to delete this comment? This will remove the comment and can't be
+					undone.
+				</p>
+				<div class="flex gap-3">
+					<button class="flex-1 rounded-md bg-clr-grayish-blue py-3 uppercase text-clr-white"
+						>No, cancel</button
+					>
+					<button class="flex-1 rounded-md bg-clr-soft-red uppercase text-clr-white"
+						>Yes, delete</button
+					>
+				</div>
+			</div>
+		</div>
+	{/if}
+
 	<div class="px-4 pt-4 md:mx-auto md:max-w-3xl md:px-6 md:pt-6">
 		<!-- comments -->
 		{#each $comments as comment (comment.id)}
