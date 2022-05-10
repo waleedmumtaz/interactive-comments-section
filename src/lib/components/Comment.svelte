@@ -1,7 +1,7 @@
 <script>
 	import ReplyComment from '$lib/components/ReplyComment.svelte';
 	import { currentUser } from '$lib/stores/comments.js';
-	import { deleteComment, downvoteComment, upvoteComment } from '$lib/utils.js';
+	import { deleteComment,downvoteComment,upvoteComment } from '$lib/utils.js';
 	import EditComment from './EditComment.svelte';
 
 	export let id, avatar, userName, createdAt, content, score, replyingTo;
@@ -181,7 +181,9 @@
 		</div>
 	</div>
 	{#if isReplying}
-		<ReplyComment replyId={id} replyingTo={userName} bind:isReplying />
+		<div>
+			<ReplyComment replyId={id} replyingTo={userName} bind:isReplying />
+		</div>
 	{/if}
 	{#if isEditing}
 		<EditComment
