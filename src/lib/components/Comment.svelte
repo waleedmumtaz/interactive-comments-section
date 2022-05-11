@@ -1,7 +1,8 @@
 <script>
 	import ReplyComment from '$lib/components/ReplyComment.svelte';
 	import { currentUser } from '$lib/stores/comments.js';
-	import { deleteComment,downvoteComment,upvoteComment } from '$lib/utils.js';
+	import { deleteComment, downvoteComment, upvoteComment } from '$lib/utils.js';
+	import { fade } from 'svelte/transition';
 	import EditComment from './EditComment.svelte';
 
 	export let id, avatar, userName, createdAt, content, score, replyingTo;
@@ -11,9 +12,38 @@
 
 	let upvotedOnce,
 		downvotedOnce = false;
+
+	let confirmDeleteComment = false;
 </script>
 
 <div>
+	<!-- Overlay for delete comment confirmation -->
+	{#if confirmDeleteComment}
+		<div transition:fade class="absolute inset-0 h-full grid place-items-center bg-black bg-opacity-40">
+			<div class="m-4 max-w-sm rounded-md bg-clr-light-gray p-6">
+				<p class="text-2xl font-fw-medium text-clr-dark-blue">Delete comment</p>
+				<p class="my-3">
+					Are you sure you want to delete this comment? This will remove the comment and can't be
+					undone.
+				</p>
+				<div class="flex gap-3">
+					<button
+						on:click|preventDefault={() => (confirmDeleteComment = false)}
+						class="flex-1 rounded-md bg-clr-grayish-blue py-3 uppercase text-clr-white"
+						>No, cancel</button
+					>
+					<button
+						on:click|preventDefault={() => {
+							deleteComment(id);
+							confirmDeleteComment = false;
+						}}
+						class="flex-1 rounded-md bg-clr-soft-red uppercase text-clr-white">Yes, delete</button
+					>
+				</div>
+			</div>
+		</div>
+	{/if}
+
 	<div class={`${isEditing ? 'hidden' : 'block'} pb-4 md:pb-6`}>
 		<div
 			class="rounded-md bg-white p-4 md:grid md:grid-cols-12 md:items-start md:justify-start md:gap-6 md:p-6"
@@ -74,7 +104,7 @@
 						{#if userName === $currentUser.username}
 							<!-- delete button (desktop) -->
 							<button
-								on:click|preventDefault={() => deleteComment(id)}
+								on:click|preventDefault={() => (confirmDeleteComment = true)}
 								class="hidden font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:flex md:items-center md:gap-2"
 							>
 								<span>
@@ -148,7 +178,7 @@
 						{#if userName === $currentUser.username}
 							<!-- delete button (mobile) -->
 							<button
-								on:click|preventDefault={() => deleteComment(id)}
+								on:click|preventDefault={() => (confirmDeleteComment = true)}
 								class="flex items-center gap-2 font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:hidden"
 							>
 								<span>
