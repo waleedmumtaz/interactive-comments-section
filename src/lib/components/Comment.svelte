@@ -19,7 +19,7 @@
 <div>
 	<!-- Overlay for delete comment confirmation -->
 	{#if confirmDeleteComment}
-		<div transition:fade class="absolute inset-0 h-full grid place-items-center bg-black bg-opacity-40">
+		<div transition:fade class="fixed inset-0 grid place-items-center bg-black bg-opacity-40">
 			<div class="m-4 max-w-sm rounded-md bg-clr-light-gray p-6">
 				<p class="text-2xl font-fw-medium text-clr-dark-blue">Delete comment</p>
 				<p class="my-3">
