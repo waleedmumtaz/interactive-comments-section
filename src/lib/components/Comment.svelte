@@ -108,7 +108,7 @@
 								class="hidden font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:flex md:items-center md:gap-2"
 							>
 								<span>
-									<img src="/icon-delete.svg" alt="delete" />
+									<img src="/icon-delete.svg" alt="" />
 								</span>Delete
 							</button>
 						{/if}
@@ -118,7 +118,7 @@
 								on:click|preventDefault={() => (isEditing = true)}
 								class="hidden active:brightness-200 md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8"
 								><span>
-									<img src="/icon-edit.svg" alt="edit" />
+									<img src="/icon-edit.svg" alt="" />
 								</span>Edit
 							</button>
 						{:else}
@@ -127,7 +127,7 @@
 								on:click|preventDefault={() => (isReplying = true)}
 								class="hidden md:flex md:items-center md:gap-2 md:font-fw-medium md:text-clr-moderate-blue md:outline-offset-8 active:brightness-200"
 								><span>
-									<img src="/icon-reply.svg" alt="reply" />
+									<img src="/icon-reply.svg" alt="" />
 								</span>Reply
 							</button>
 						{/if}
@@ -182,7 +182,7 @@
 								class="flex items-center gap-2 font-fw-medium text-clr-soft-red outline-offset-8 active:brightness-200 md:hidden"
 							>
 								<span>
-									<img src="/icon-delete.svg" alt="delete" />
+									<img src="/icon-delete.svg" alt="" />
 								</span>Delete
 							</button>
 						{/if}
@@ -192,7 +192,7 @@
 								on:click|preventDefault={() => (isEditing = true)}
 								class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 active:brightness-200 md:hidden"
 								><span>
-									<img src="/icon-edit.svg" alt="edit" />
+									<img src="/icon-edit.svg" alt="" />
 								</span>Edit
 							</button>
 						{:else}
@@ -201,7 +201,7 @@
 								on:click|preventDefault={() => (isReplying = true)}
 								class="flex items-center gap-2 font-fw-medium text-clr-moderate-blue outline-offset-8 md:hidden active:brightness-200"
 								><span>
-									<img src="/icon-reply.svg" alt="reply" />
+									<img src="/icon-reply.svg" alt="" />
 								</span>Reply
 							</button>
 						{/if}
